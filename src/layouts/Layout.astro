@@ -3,8 +3,11 @@ import { ClientRouter } from "astro:transitions";
 import "../css/index.css";
 import Header from "../components/layout/header.astro";
 import Sidebar from "../components/layout/sidebar.astro";
+import Mail from "../components/mail.astro";
 
 const { title = "Welcome" } = Astro.props;
+const view = Astro.url.searchParams.get("view");
+const templateTitle = title.replace("templates/html", "");
 ---
 
 <!doctype html>
@@ -20,20 +23,26 @@ const { title = "Welcome" } = Astro.props;
   <body>
     <div class="drawer drawer-open">
       <input id="my-drawer-2" type="checkbox" class="drawer-toggle" />
-      <div class="drawer-content content">
-        <Header title={title.replace("templates/html", "")} />
-        <section class="template w-full max-w-[1200px] py-2">
+      <div
+        class={`drawer-content content ${view === "mobile" ? "bg-neutral-700" : ""}`}
+      >
+        <Header title={templateTitle} />
+        <section class="w-full py-2 mx-auto relative">
+          {
+            title !== "Welcome" && (
+              <Mail template={title} title={templateTitle} />
+            )
+          }
           <slot />
         </section>
       </div>
       <Sidebar title={title} />
     </div>
+    <style>
+      .content {
+        display: grid;
+        grid-template-rows: auto 1fr;
+      }
+    </style>
   </body>
 </html>
-
-<style>
-  .content {
-    display: grid;
-    grid-template-rows: auto 1fr;
-  }
-</style>

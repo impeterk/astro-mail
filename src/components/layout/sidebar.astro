@@ -10,7 +10,7 @@ const templates = Object.keys(matches).map((template) => {
     .replace("../templates/html/", "")
     .split("/")
     .filter((level) => !level.includes(".html"));
-  const name = template.split("/").at(-1);
+  const name = template.split("/").at(-1)?.replace(".html", "");
   return { link, levels, name };
 });
 

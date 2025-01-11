@@ -20,6 +20,10 @@
         >
           Don't click me! I am not working
         </mj-msobutton>
+        <mj-image
+          width="100px"
+          src="https://mjml.io/assets/img/logo-small.png"
+        ></mj-image>
       </mj-column>
     </mj-section>
   </mj-body>

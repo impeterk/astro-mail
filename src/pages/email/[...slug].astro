@@ -1,7 +1,6 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 const { slug } = Astro.params;
-const url = Astro.url;
 
 const matches = import.meta.glob("../../templates/html/**.html", {
   eager: true,
@@ -30,6 +29,6 @@ const view = Astro.url.searchParams.get("view");
   .mobile {
     @apply shadow-xl rounded-lg border;
     width: 360px;
-    border-color: hsl(215, 14%, 54%);
+    border-color: var(--color-base-300);
   }
 </style>

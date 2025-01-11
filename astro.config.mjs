@@ -1,7 +1,8 @@
 // @ts-check
-import { defineConfig } from 'astro/config';
+import { defineConfig, envField } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 import mjml from 'vite-plugin-mjml'
+import node from '@astrojs/node';
 // https://astro.build/config
 export default defineConfig({
     vite: {
@@ -14,5 +15,18 @@ export default defineConfig({
                 watch: true
             })]
     },
-    output: 'server'
+
+    output: 'server',
+
+    env: {
+        schema: {
+            RESEND_API: envField.string({ context: "server", access: "secret" }),
+            SMTP_USER: envField.string({ context: "server", access: "secret" }),
+            SMTP_KEY: envField.string({ context: "server", access: "secret" })
+        }
+    },
+
+    adapter: node({
+        mode: 'standalone'
+    })
 });

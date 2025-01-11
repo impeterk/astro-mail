@@ -1,0 +1,48 @@
+---
+import { actions } from "astro:actions";
+import LucideSend from "./icons/LucideSend.astro";
+import LucideMail from "./icons/LucideMail.astro";
+
+const { template, title } = Astro.props;
+---
+
+<div class="absolute top-4 right-4">
+  <details class="dropdown dropdown-end">
+    <summary class="btn m-1 btn-soft btn-primary"
+      ><LucideMail />Send template</summary
+    >
+    <div
+      class="card dropdown-content w-96 bg-base-200 card-xs shadow-sm rounded-md p-4"
+    >
+      <div class="card-body">
+        <form method="POST" action={actions.send}>
+          <h2 class="card-title">Send this template to</h2>
+          <fieldset class="fieldset">
+            <fieldset class="fieldset">
+              <label class="fieldset-legend">Email</label>
+              <input
+                type="text"
+                class="input validator"
+                placeholder="example@mail.com"
+                name="email"
+                required
+              />
+              <div class="validator-hint hidden">
+                Please enter a email address
+              </div>
+              <div class="fieldset-label mt-0.5">
+                multiple emails separete with comma - <b>,</b>
+              </div>
+            </fieldset>
+
+            <input type="text" hidden value={template} name="template" />
+            <input type="text" hidden value={title} name="title" />
+            <button class="btn btn-primary"
+              >Send <LucideSend class="size-4" /></button
+            >
+          </fieldset>
+        </form>
+      </div>
+    </div>
+  </details>
+</div>
