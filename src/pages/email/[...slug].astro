@@ -14,12 +14,13 @@ const view = Astro.url.searchParams.get("view");
 ---
 
 <Layout title={slug}>
-  <div class={`${view || ""} div bg-base-100`}>
+  <div class={`${view || ""} div bg-base-100 `}>
     {Page && <Page />}
   </div>
 </Layout>
 
 <style>
+  @import "tailwindcss/theme" theme(reference);
   .div {
     height: 100%;
     flex-shrink: 0;
@@ -27,9 +28,8 @@ const view = Astro.url.searchParams.get("view");
     width: 100%;
   }
   .mobile {
+    @apply shadow-xl rounded-lg border;
     width: 360px;
-    border: 1px solid;
-    border-color: var(--color-base-300);
-    border-radius: 0.5rem;
+    border-color: hsl(215, 14%, 54%);
   }
 </style>
