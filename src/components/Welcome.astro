@@ -2,11 +2,20 @@
 import astroLogo from "../assets/astro.svg";
 import background from "../assets/background.svg";
 import mjmlLogo from "../assets/mjml-logo.png";
+import HugeiconsArrowMoveUpLeft from "./icons/HugeiconsArrowMoveUpLeft.astro";
 ---
 
 <div id="container">
   <img id="background" src={background.src} alt="" fetchpriority="high" />
-  <main>
+  <main class="relative">
+    <div class="absolute w-40 top-4 left-2 flex flex-col gap-2">
+      <p>
+        <HugeiconsArrowMoveUpLeft class="size-12 ml-4 text-base" />
+      </p>
+      <span class="text-balance text-center text-xl text-[#4b5563]">
+        Select a template from the menu
+      </span>
+    </div>
     <section id="hero">
       <div class="links">
         <a href="https://astro.build"
@@ -21,14 +30,24 @@ import mjmlLogo from "../assets/mjml-logo.png";
           ><img src={mjmlLogo.src} alt="MJML Homepage" /></a
         >
       </div>
-      <h1>To get started, select the template from the sidebar</h1>
+      <div class="space-y-4">
+        <h1 class="text-4xl">
+          To get started create <b>.mjml</b> new
+          <code>/src/templates/mjml</code>
+          folder
+        </h1>
+        <h2>
+          Final templates are available in <code>/src/templates/html</code> folder
+        </h2>
+        <p>More information can be found in README.md</p>
+      </div>
     </section>
   </main>
 </div>
 
 <style>
   #background {
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
@@ -41,6 +60,7 @@ import mjmlLogo from "../assets/mjml-logo.png";
     font-family: Inter, Roboto, "Helvetica Neue", "Arial Nova", "Nimbus Sans",
       Arial, sans-serif;
     height: 100%;
+    position: relative;
   }
 
   main {
@@ -64,7 +84,9 @@ import mjmlLogo from "../assets/mjml-logo.png";
 
   .links {
     display: flex;
+    width: 100%;
     gap: 16px;
+    justify-content: center;
   }
 
   .links a {

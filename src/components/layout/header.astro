@@ -1,0 +1,15 @@
+---
+import Switch from "./switch.astro";
+
+const { title } = Astro.props;
+---
+
+<header class="navbar bg-base-300 w-full">
+  <div class="mx-2 flex-1 px-2 text-xl font-semibold">{title}</div>
+  <div class="hidden flex-none lg:block">
+    <ul class="menu menu-horizontal mx-2">
+      <!-- Navbar menu content here -->
+      <Switch />
+    </ul>
+  </div>
+</header>

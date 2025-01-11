@@ -1,0 +1,29 @@
+---
+import LucideMonitor from "../icons/LucideMonitor.astro";
+import LucideSmartphone from "../icons/LucideSmartphone.astro";
+
+const searchParams = Astro.url.searchParams;
+
+const view = searchParams.get("view");
+---
+
+<div class="join bg-base">
+  <form class="btn-join">
+    <input hidden name="view" value="desktop" />
+    <button
+      class={`${view !== "mobile" ? "btn-primary" : ""} btn btn-sm rounded-l-lg`}
+    >
+      <LucideMonitor class="font-semibold size-5" />
+      Desktop
+    </button>
+  </form>
+  <form class="btn-join">
+    <input hidden name="view" value="mobile" />
+    <button
+      class={`${view === "mobile" ? "btn-primary" : ""} btn-join btn btn-sm rounded-r-lg`}
+    >
+      <LucideSmartphone class="font-semibold size-5" />
+      Mobile
+    </button>
+  </form>
+</div>

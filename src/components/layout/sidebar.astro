@@ -1,0 +1,53 @@
+---
+import LucideFiles from "../icons/LucideFiles.astro";
+const matches = await import.meta.glob("../../templates/html/**.html", {
+  eager: true,
+});
+const search = Astro.url.search;
+const templates = Object.keys(matches).map((template) => {
+  const link = "/email/" + template.replace("../../", "") + search;
+  const levels = template
+    .replace("../templates/html/", "")
+    .split("/")
+    .filter((level) => !level.includes(".html"));
+  const name = template.split("/").at(-1);
+  return { link, levels, name };
+});
+
+const { title } = Astro.props;
+---
+
+<aside class="drawer-side">
+  <ul
+    class="menu bg-base-200 text-base-content min-h-full w-60 p-4 gap-1 border-r border-base-300"
+  >
+    <li class="menu-title">Templates</li>
+    <div class="divider my-0"></div>
+    {
+      templates.map((t) => (
+        <li>
+          <a
+            href={t.link}
+            class={`/email/${title}${search}` === t.link ? "menu-active" : ""}
+          >
+            {t.name}
+          </a>
+        </li>
+      ))
+    }
+    {
+      !Boolean(templates.length) && (
+        <p class="text-base-content/60">
+          No templates yet <br />
+          Start by creating your first template in
+          <code class="text-base-content">src/templates/mjml</code> folder
+        </p>
+      )
+    }
+    <li class="mt-auto">
+      <a href="https://documentation.mjml.io/#components" target="_blank"
+        ><LucideFiles />mjml documentation</a
+      >
+    </li>
+  </ul>
+</aside>

@@ -1,0 +1,35 @@
+---
+import Layout from "../../layouts/Layout.astro";
+const { slug } = Astro.params;
+const url = Astro.url;
+
+const matches = import.meta.glob("../../templates/html/**.html", {
+  eager: true,
+});
+
+// @ts-ignore
+const Page = matches[`../../${slug}`]?.default;
+
+const view = Astro.url.searchParams.get("view");
+---
+
+<Layout title={slug}>
+  <div class={`${view || ""} div bg-base-100`}>
+    {Page && <Page />}
+  </div>
+</Layout>
+
+<style>
+  .div {
+    height: 100%;
+    flex-shrink: 0;
+    margin-inline: auto;
+    width: 100%;
+  }
+  .mobile {
+    width: 360px;
+    border: 1px solid;
+    border-color: var(--color-base-300);
+    border-radius: 0.5rem;
+  }
+</style>

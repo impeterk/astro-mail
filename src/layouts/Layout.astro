@@ -1,69 +1,39 @@
 ---
 import { ClientRouter } from "astro:transitions";
+import "../css/index.css";
+import Header from "../components/layout/header.astro";
+import Sidebar from "../components/layout/sidebar.astro";
 
-const matches = import.meta.glob("../templates/html/**.html", { eager: true });
-const templates = Object.keys(matches);
-console.log(templates);
+const { title = "Welcome" } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="winter">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
-    <title>Astro Basics</title>
+    <title>Astro mjml</title>
     <ClientRouter />
   </head>
   <body>
-    <aside class="sidebar">
-      <nav>
-        <ul>
-          {
-            templates.map((t) => (
-              <li>
-                <a href={t.replace("../", "/")}>
-                  {t.replace("../templates/html/", "")}
-                </a>
-              </li>
-            ))
-          }
-        </ul>
-      </nav>
-    </aside>
-    <main>
-      <header class="header">this is header</header>
-      <section>
-        <slot />
-      </section>
-    </main>
-    <style>
-      html,
-      body {
-        margin: 0;
-        width: 100%;
-        height: 100%;
-      }
-      body {
-        display: grid;
-        grid-template-columns: auto 1fr;
-      }
-      .sidebar {
-        margin-block: 2rem;
-        width: 200px;
-        border-right: 1px solid #333;
-      }
-      main {
-        width: 100%;
-        display: grid;
-        grid-template-rows: auto 1fr;
-      }
-      .header {
-        background: #fff;
-        border-bottom: 1px solid #333;
-        padding: 2rem;
-      }
-    </style>
+    <div class="drawer drawer-open">
+      <input id="my-drawer-2" type="checkbox" class="drawer-toggle" />
+      <div class="drawer-content content">
+        <Header title={title.replace("templates/html", "")} />
+        <section class="template w-full max-w-[1200px] py-2">
+          <slot />
+        </section>
+      </div>
+      <Sidebar title={title} />
+    </div>
   </body>
 </html>
+
+<style>
+  .content {
+    display: grid;
+    grid-template-rows: auto 1fr;
+  }
+</style>
