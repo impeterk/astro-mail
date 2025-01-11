@@ -1,22 +1,69 @@
+---
+import { ClientRouter } from "astro:transitions";
+
+const matches = import.meta.glob("../templates/html/**.html", { eager: true });
+const templates = Object.keys(matches);
+console.log(templates);
+---
+
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Astro Basics</title>
+    <ClientRouter />
+  </head>
+  <body>
+    <aside class="sidebar">
+      <nav>
+        <ul>
+          {
+            templates.map((t) => (
+              <li>
+                <a href={t.replace("../", "/")}>
+                  {t.replace("../templates/html/", "")}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+    </aside>
+    <main>
+      <header class="header">this is header</header>
+      <section>
+        <slot />
+      </section>
+    </main>
+    <style>
+      html,
+      body {
+        margin: 0;
+        width: 100%;
+        height: 100%;
+      }
+      body {
+        display: grid;
+        grid-template-columns: auto 1fr;
+      }
+      .sidebar {
+        margin-block: 2rem;
+        width: 200px;
+        border-right: 1px solid #333;
+      }
+      main {
+        width: 100%;
+        display: grid;
+        grid-template-rows: auto 1fr;
+      }
+      .header {
+        background: #fff;
+        border-bottom: 1px solid #333;
+        padding: 2rem;
+      }
+    </style>
+  </body>
 </html>
-
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>

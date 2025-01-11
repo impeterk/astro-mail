@@ -10,5 +10,8 @@
   },
   "dependencies": {
     "astro": "^5.1.5"
+  },
+  "devDependencies": {
+    "vite-plugin-mjml": "^0.4.0"
   }
 }
