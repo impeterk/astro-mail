@@ -3,7 +3,13 @@ import { z } from "astro:schema";
 import nodemailer from "nodemailer";
 import path from "path";
 import fs from "fs/promises";
-import { SMTP_KEY, SMTP_USER } from "astro:env/server";
+import {
+  SMTP_KEY,
+  SMTP_USER,
+  SMTP_HOST,
+  SMTP_PORT,
+  SMTP_SECURE,
+} from "astro:env/server";
 
 export const server = {
   send: defineAction({
@@ -29,8 +35,9 @@ export const server = {
 };
 
 const transporter = nodemailer.createTransport({
-  host: "smtp-relay.brevo.com",
-  port: 587,
+  host: SMTP_HOST,
+  port: SMTP_PORT,
+  secure: SMTP_SECURE,
   auth: {
     user: SMTP_USER,
     pass: SMTP_KEY,

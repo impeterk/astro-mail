@@ -3,7 +3,7 @@ import { ClientRouter } from "astro:transitions";
 import "../css/index.css";
 import Header from "../components/layout/header.astro";
 import Sidebar from "../components/layout/sidebar.astro";
-import Mail from "../components/mail.astro";
+import SendMail from "../components/send-mail.astro";
 
 const { title = "Welcome" } = Astro.props;
 const view = Astro.url.searchParams.get("view");
@@ -30,7 +30,7 @@ const templateTitle = title.replace("templates/html", "");
         <section class="w-full py-2 mx-auto relative">
           {
             title !== "Welcome" && (
-              <Mail template={title} title={templateTitle} />
+              <SendMail template={title} title={templateTitle} />
             )
           }
           <slot />
