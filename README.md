@@ -8,7 +8,7 @@ To get strated run
 npm install
 ```
 
-After successfull install run
+After successful install run
 
 ```sh
 npm run dev
@@ -19,6 +19,10 @@ Project starts and is available on port `localhost:4321`
 ### ❗ Know issues
 
 - Generate on save seems to not be working properly on windows.
+- Saving partials only does not trigger rebuild of the template
+  - expected: the `partials/` folder is not _watched_ by the compiler
+  - Just save the template you are importing the partial to
+  - For multiple templates, restarting the server works --> NOT Ideal #sad
 
 ## 🚀 ✉️ Project Structure
 
@@ -37,14 +41,23 @@ Inside of your Astro project, you'll see the following folders and files:
 │       └── email/
 │           └── [...slug].astro
 │   └── components/
-│   └── templates/
+│   └── emails/
 │       └── mjml/
+│           └── templates/
+│           └── partials/
 │       └── html/
 └── package.json
 ```
 
-all templates should be created inside the `src/templates/mjml` folder. You can nest templates in folders as well.
-On save template should be generated in the `src/templates/html` folder mirroring the `mjml` folder structure.
+all templates should be created inside the `src/emails/mjml/templates` folder. You can nest templates in folders as well.
+On save template should be generated in the `src/emails/html` folder mirroring the `mjml` folder structure.
+
+> [!IMPORTANT]
+> import partials relatively to the `vite.config.ts` file.
+
+```mjml
+<mj-include path="src/emails/mjml/partials/main.mjml" />
+```
 
 ## 📨 Sending emails
 

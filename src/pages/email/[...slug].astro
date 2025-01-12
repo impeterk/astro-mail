@@ -2,9 +2,10 @@
 import Layout from "../../layouts/Layout.astro";
 const { slug } = Astro.params;
 
-const matches = import.meta.glob("../../templates/html/**.html", {
+const matches = import.meta.glob("../../emails/html/**.html", {
   eager: true,
 });
+
 
 // @ts-ignore
 const Page = matches[`../../${slug}`]?.default;

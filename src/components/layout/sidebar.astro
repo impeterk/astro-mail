@@ -1,13 +1,13 @@
 ---
 import LucideFiles from "../icons/LucideFiles.astro";
-const matches = await import.meta.glob("../../templates/html/**.html", {
+const matches = import.meta.glob("../../emails/html/**.html", {
   eager: true,
 });
 const search = Astro.url.search;
 const templates = Object.keys(matches).map((template) => {
   const link = "/email/" + template.replace("../../", "") + search;
   const levels = template
-    .replace("../templates/html/", "")
+    .replace("../emails/html/", "")
     .split("/")
     .filter((level) => !level.includes(".html"));
   const name = template.split("/").at(-1)?.replace(".html", "");
