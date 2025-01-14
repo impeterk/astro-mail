@@ -1,19 +1,16 @@
 ---
 import LucideFiles from "../icons/LucideFiles.astro";
+import { templateLoader } from "../../lib/loaders";
 const matches = import.meta.glob("../../emails/html/**.html", {
   eager: true,
 });
-const search = Astro.url.search;
-const templates = Object.keys(matches).map((template) => {
-  const link = "/email/" + template.replace("../../", "") + search;
-  const levels = template
-    .replace("../emails/html/", "")
-    .split("/")
-    .filter((level) => !level.includes(".html"));
-  const name = template.split("/").at(-1)?.replace(".html", "");
-  return { link, levels, name };
-});
 
+const search = Astro.url.search;
+const activeTab = Astro.url.searchParams.get("active-tab") || "mjml";
+const templates = templateLoader({ type: activeTab, search: search });
+
+const activeLink = `${Astro.url.pathname}${search}`;
+const view = Astro.url.searchParams.get("view");
 const { title } = Astro.props;
 ---
 
@@ -22,21 +19,32 @@ const { title } = Astro.props;
     class="menu bg-base-200 text-base-content min-h-full w-60 p-4 gap-1 border-r border-base-300"
   >
     <li class="menu-title">Templates</li>
+    <div class="join">
+      <a
+        href={view ? `?view=${view}&active-tab=mjml` : "?active-tab=mjml"}
+        class={`btn join-item ${activeTab === "mjml" ? "btn-primary" : "btn-soft"}`}
+        >Mjml</a
+      >
+      <input hidden name="active-tab" value="js" />
+      <a
+        href={view ? `?view=${view}&active-tab=js` : "?active-tab=js"}
+        class={`btn join-item ${activeTab === "js" ? "btn-primary" : "btn-soft"}`}
+        >js</a
+      >
+    </div>
     <div class="divider my-0"></div>
     {
-      templates.map((t) => (
-        <li>
-          <a
-            href={t.link}
-            class={`/email/${title}${search}` === t.link ? "menu-active" : ""}
-          >
-            {t.name}
-          </a>
-        </li>
-      ))
+      templates &&
+        templates.map((t) => (
+          <li>
+            <a href={t.link} class={activeLink === t.link ? "menu-active" : ""}>
+              {t.name}
+            </a>
+          </li>
+        ))
     }
     {
-      !Boolean(templates.length) && (
+      !Boolean(templates?.length) && (
         <p class="text-base-content/60">
           No templates yet <br />
           Start by creating your first template in

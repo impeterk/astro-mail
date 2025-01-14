@@ -1,0 +1,14 @@
+---
+import Email from "../../../layouts/Email.astro";
+const { slug } = Astro.params;
+const matches = import.meta.glob("../../../emails/js/**.js", {
+  eager: true,
+});
+
+// @ts-ignore
+const file = matches[`../../../${slug}`];
+---
+
+<Email title={file?.title}>
+  {file && <Fragment set:html={file.default} />}
+</Email>

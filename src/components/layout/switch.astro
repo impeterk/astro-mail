@@ -5,25 +5,22 @@ import LucideSmartphone from "../icons/LucideSmartphone.astro";
 const searchParams = Astro.url.searchParams;
 
 const view = searchParams.get("view");
+const activeTab = searchParams.get("active-tab");
 ---
 
 <div class="join bg-base rounded-lg">
-  <form class="btn-join">
-    <input hidden name="view" value="desktop" />
-    <button
-      class={`${view !== "mobile" ? "btn-primary" : ""} btn btn-sm rounded-l-lg`}
-    >
-      <LucideMonitor class="font-semibold size-5" />
-      Desktop
-    </button>
-  </form>
-  <form class="btn-join">
-    <input hidden name="view" value="mobile" />
-    <button
-      class={`${view === "mobile" ? "btn-primary" : ""} btn-join btn btn-sm rounded-r-lg`}
-    >
-      <LucideSmartphone class="font-semibold size-5" />
-      Mobile
-    </button>
-  </form>
+  <a
+    href={activeTab ? `?active-tab=${activeTab}&view=desktop` : "?view=desktop"}
+    class={`${view !== "mobile" ? "btn-primary" : ""} btn-join btn btn-sm rounded-l-lg`}
+  >
+    <LucideMonitor class="font-semibold size-5" />
+    Desktop
+  </a>
+  <a
+    href={activeTab ? `?active-tab=${activeTab}&view=mobile` : "?view=mobile"}
+    class={`${view === "mobile" ? "btn-primary" : ""} btn-join btn btn-sm rounded-r-lg`}
+  >
+    <LucideSmartphone class="font-semibold size-5" />
+    Mobile
+  </a>
 </div>

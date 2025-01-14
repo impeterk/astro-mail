@@ -1,21 +1,14 @@
 ---
-import Layout from "../../layouts/Layout.astro";
-const { slug } = Astro.params;
-
-const matches = import.meta.glob("../../emails/html/**.html", {
-  eager: true,
-});
-
-
-// @ts-ignore
-const Page = matches[`../../${slug}`]?.default;
+import Layout from "./Layout.astro";
 
 const view = Astro.url.searchParams.get("view");
+
+const { title } = Astro.props;
 ---
 
-<Layout title={slug}>
+<Layout title={title}>
   <div class={`${view || ""} div bg-base-100 `}>
-    {Page && <Page />}
+    <slot />
   </div>
 </Layout>
 

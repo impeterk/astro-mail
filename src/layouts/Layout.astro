@@ -4,7 +4,7 @@ import "../css/index.css";
 import Header from "../components/layout/header.astro";
 import Sidebar from "../components/layout/sidebar.astro";
 import SendMail from "../components/send-mail.astro";
-
+import LoadingIndicator from "astro-loading-indicator/component";
 const { title = "Welcome" } = Astro.props;
 const view = Astro.url.searchParams.get("view");
 const templateTitle = title.replace("emails/html", "");
@@ -19,6 +19,7 @@ const templateTitle = title.replace("emails/html", "");
     <meta name="generator" content={Astro.generator} />
     <title>Astro mjml</title>
     <ClientRouter />
+    <LoadingIndicator color="#7e22ce" threshold={false} />
   </head>
   <body>
     <div class="drawer drawer-open">

@@ -18,11 +18,19 @@ Project starts and is available on port `localhost:4321`
 
 ### ❗ Know issues
 
+#### MJML
+
 - Generate on save seems to not be working properly on windows.
 - Saving partials only does not trigger rebuild of the template
   - expected: the `partials/` folder is not _watched_ by the compiler
   - Just save the template you are importing the partial to
   - For multiple templates, restarting the server works --> NOT Ideal #sad
+
+#### JS
+
+- Sending email templates not implemented yet
+- Need to figure out, location for files and when to render them
+  - maybe separate command ?
 
 ## 🚀 ✉️ Project Structure
 
