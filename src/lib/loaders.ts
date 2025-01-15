@@ -12,20 +12,27 @@ export function templateLoader({
     });
   }
   if (type === "js") {
-    matches = import.meta.glob("../emails/js/**.js", {
+    matches = import.meta.glob("../emails/js/**.jsx", {
       eager: true,
     });
   }
   if (!matches) {
     return null;
   }
+
   const templates = Object.keys(matches).map((template) => {
-    const link = `/email/${type}/` + template.replace("../", "") + search;
+    const link =
+      `/email/${type}/` +
+      template.replace("../", "").replace(/\.\w+$/, "") +
+      search;
     const levels = template
       .replace(`/email/${type}/`, "")
       .split("/")
       .filter((level) => !level.includes(`.${type}`));
-    const name = template.split("/").at(-1)?.replace(`.${type}`, "");
+    const name = template
+      .split("/")
+      .at(-1)
+      ?.replace(/\.\w+$/, "");
     return { link, levels, name };
   });
   return templates;

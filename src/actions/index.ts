@@ -20,9 +20,8 @@ export const server = {
       title: z.string(),
     }),
     handler: async ({ email, template, title }) => {
-      console.log(import.meta.dirname);
       const templatePath = path.join(process.cwd(), "src", template);
-      const templateFile = await fs.readFile(templatePath, "utf-8");
+      const templateFile = await fs.readFile(`${templatePath}.html`, "utf-8");
       const data = await mailer({
         to: email,
         html: templateFile,

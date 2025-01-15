@@ -3,7 +3,7 @@ import Email from "../../../layouts/Email.astro";
 const { slug } = Astro.params;
 import fs from "fs/promises";
 
-const file = await fs.readFile(`src/${slug}`, "utf-8");
+const file = await fs.readFile(`src/${slug}.html`, "utf-8");
 ---
 
 <Email title={slug}>

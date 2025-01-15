@@ -1,17 +1,13 @@
 ---
 import LucideFiles from "../icons/LucideFiles.astro";
 import { templateLoader } from "../../lib/loaders";
-const matches = import.meta.glob("../../emails/html/**.html", {
-  eager: true,
-});
+import { navParams } from "../../lib/utils";
 
 const search = Astro.url.search;
 const activeTab = Astro.url.searchParams.get("active-tab") || "mjml";
 const templates = templateLoader({ type: activeTab, search: search });
 
 const activeLink = `${Astro.url.pathname}${search}`;
-const view = Astro.url.searchParams.get("view");
-const { title } = Astro.props;
 ---
 
 <aside class="drawer-side">
@@ -21,13 +17,12 @@ const { title } = Astro.props;
     <li class="menu-title">Templates</li>
     <div class="join">
       <a
-        href={view ? `?view=${view}&active-tab=mjml` : "?active-tab=mjml"}
+        href={navParams(Astro.url.searchParams, "active-tab", "mjml")}
         class={`btn join-item ${activeTab === "mjml" ? "btn-primary" : "btn-soft"}`}
         >Mjml</a
       >
-      <input hidden name="active-tab" value="js" />
       <a
-        href={view ? `?view=${view}&active-tab=js` : "?active-tab=js"}
+        href={navParams(Astro.url.searchParams, "active-tab", "js")}
         class={`btn join-item ${activeTab === "js" ? "btn-primary" : "btn-soft"}`}
         >js</a
       >
@@ -48,7 +43,7 @@ const { title } = Astro.props;
         <p class="text-base-content/60">
           No templates yet <br />
           Start by creating your first template in
-          <code class="text-base-content">src/templates/mjml</code> folder
+          <code class="text-base-content">src/emails/mjml|js</code> folder
         </p>
       )
     }

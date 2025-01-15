@@ -4,6 +4,7 @@ import LucideSend from "./icons/LucideSend.astro";
 import LucideMail from "./icons/LucideMail.astro";
 
 const { template, title } = Astro.props;
+console.log({ template });
 ---
 
 <div class="absolute top-4 right-4">
@@ -15,7 +16,7 @@ const { template, title } = Astro.props;
       class="card dropdown-content w-96 bg-base-200 card-xs shadow-sm rounded-md p-4"
     >
       <div class="card-body">
-        <form method="POST" action={actions.send}>
+        <form method="post" action={actions.send}>
           <h2 class="card-title">Send this template to</h2>
           <fieldset class="fieldset">
             <fieldset class="fieldset">
@@ -37,7 +38,7 @@ const { template, title } = Astro.props;
 
             <input type="text" hidden value={template} name="template" />
             <input type="text" hidden value={title} name="title" />
-            <button class="btn btn-primary"
+            <button class="btn btn-primary" id="send-btn"
               >Send <LucideSend class="size-4" /></button
             >
           </fieldset>
@@ -46,3 +47,18 @@ const { template, title } = Astro.props;
     </div>
   </details>
 </div>
+
+<script>
+  // import { actions } from "astro:actions";
+  // import { navigate } from "astro:transitions/client";
+
+  // const form = document.querySelector("form");
+  // const btn = document.querySelector("#send-btn");
+  // form?.addEventListener("submit", async (event) => {
+  //   event.preventDefault();
+  //   const formData = new FormData(form);
+  //   // const {data} = await actions.send(formData);
+  //   // if (data) {
+  //   // }
+  // });
+</script>

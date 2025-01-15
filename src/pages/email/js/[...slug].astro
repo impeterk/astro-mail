@@ -1,14 +1,28 @@
 ---
 import Email from "../../../layouts/Email.astro";
+import { renderTemplate, exportTemplate } from "../../../lib/utils";
+import path from "path";
 const { slug } = Astro.params;
-const matches = import.meta.glob("../../../emails/js/**.js", {
+
+// loads all templates
+// I was not able to do this more dynamically
+const matches = import.meta.glob("../../../emails/js/**.jsx", {
   eager: true,
 });
+const file = matches[`../../../${slug}.jsx`];
 
+// creates HTML from mjml in JSX template and exports it as html to new location
 // @ts-ignore
-const file = matches[`../../../${slug}`];
+const template = renderTemplate(file?.default());
+const filePath = path.join(process.cwd(), "src", slug!);
+await exportTemplate(filePath, template);
 ---
 
-<Email title={file?.title}>
-  {file && <Fragment set:html={file.default} />}
-</Email>
+{
+  (
+    // @ts-ignore
+    <Email title={file?.title}>
+      {file && <Fragment set:html={template} />}
+    </Email>
+  )
+}

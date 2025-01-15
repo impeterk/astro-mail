@@ -1,7 +1,7 @@
 ---
 import LucideMonitor from "../icons/LucideMonitor.astro";
 import LucideSmartphone from "../icons/LucideSmartphone.astro";
-
+import { navParams } from "../../lib/utils";
 const searchParams = Astro.url.searchParams;
 
 const view = searchParams.get("view");
@@ -10,14 +10,14 @@ const activeTab = searchParams.get("active-tab");
 
 <div class="join bg-base rounded-lg">
   <a
-    href={activeTab ? `?active-tab=${activeTab}&view=desktop` : "?view=desktop"}
+    href={navParams(searchParams, "view", "desktop")}
     class={`${view !== "mobile" ? "btn-primary" : ""} btn-join btn btn-sm rounded-l-lg`}
   >
     <LucideMonitor class="font-semibold size-5" />
     Desktop
   </a>
   <a
-    href={activeTab ? `?active-tab=${activeTab}&view=mobile` : "?view=mobile"}
+    href={navParams(searchParams, "view", "mobile")}
     class={`${view === "mobile" ? "btn-primary" : ""} btn-join btn btn-sm rounded-r-lg`}
   >
     <LucideSmartphone class="font-semibold size-5" />
