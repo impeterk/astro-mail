@@ -1,0 +1,22 @@
+---
+import { navParams } from "../../lib/utils";
+const { activeTab, searchParams } = Astro.props;
+---
+
+<div class="join">
+  <a
+    href={navParams(searchParams, "active-tab", "mjml")}
+    class={`btn join-item ${activeTab === "mjml" ? "btn-primary" : "btn-soft"}`}
+    >Mjml</a
+  >
+  <a
+    href={navParams(searchParams, "active-tab", "js")}
+    class={`btn join-item ${activeTab === "js" ? "btn-primary" : "btn-soft"}`}
+    >js</a
+  >
+  <a
+    href={navParams(searchParams, "active-tab", "react")}
+    class={`btn join-item ${activeTab === "react" ? "btn-primary" : "btn-soft"}`}
+    >React</a
+  >
+</div>

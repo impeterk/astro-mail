@@ -1,21 +1,16 @@
 // @ts-check
 import { defineConfig, envField } from "astro/config";
 import tailwindcss from "@tailwindcss/vite";
-import mjml from "vite-plugin-mjml";
+// import mjml from "vite-plugin-mjml";
 import node from "@astrojs/node";
 import react from "@astrojs/react";
 // https://astro.build/config
 export default defineConfig({
   vite: {
     plugins: [
-      tailwindcss(),
-      mjml({
-        input: "src/emails/mjml/templates",
-        output: "src/emails/html",
-        extension: ".html",
-        watch: true,
-      }),
+      tailwindcss()
     ],
+    assetsInclude: ['**/*.mjml']
   },
 
   output: "server",

@@ -1,21 +1,27 @@
 ---
+import { renderToString } from "react-dom/server";
 import Email from "../../../layouts/Email.astro";
 import { renderTemplate, exportTemplate } from "../../../lib/utils";
-import path from "path";
 const { slug } = Astro.params;
+const { pathname } = Astro.url;
 
 // loads all templates
 // I was not able to do this more dynamically
-const matches = import.meta.glob("../../../emails/js/**.jsx", {
+const matches = import.meta.glob("/**/*.jsx", {
   eager: true,
 });
-const file = matches[`../../../${slug}.jsx`];
-
+console.log({ pathname });
+const file = matches[`/src${pathname}.jsx`];
+console.log({ jsxMatches: matches });
 // creates HTML from mjml in JSX template and exports it as html to new location
 // @ts-ignore
 const template = renderTemplate(file?.default());
-const filePath = path.join(process.cwd(), "src", slug!);
-await exportTemplate(filePath, template);
+await exportTemplate({
+  fileName: slug!.replace("js", ""),
+  type: "js",
+  content: template,
+});
+// const template = "hello here";
 ---
 
 {

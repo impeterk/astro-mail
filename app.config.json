@@ -1,0 +1,14 @@
+{
+    "js": {
+        "input": "src/templates/js",
+        "output": "out/js"
+    },
+    "mjml": {
+        "input": "src/templates/mjml",
+        "output": "out/mjml"
+    },
+    "react": {
+        "input": "src/templates/react",
+        "output": "out/react"
+    }
+}

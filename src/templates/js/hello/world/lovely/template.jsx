@@ -1,4 +1,3 @@
-import { Main } from "../mjml/partials/main.jsx";
 export const title = "Get started with Astro & Mjml";
 
 // We can write JSX components that returns mjml syntax
@@ -23,7 +22,6 @@ export default function Template() {
           </mj-column>
         </mj-section>
         {/* <mj-include path="src/emails/mjml/partials/main.mjml" />  */}
-        <Main text="random text from 'jsx'" />
         <mj-msobutton
           font-family="Helvetica"
           background-color="#f45e43"

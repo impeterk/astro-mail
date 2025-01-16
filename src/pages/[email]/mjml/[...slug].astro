@@ -1,0 +1,18 @@
+---
+import Email from "../../../layouts/Email.astro";
+import { renderMjml, exportTemplate } from "../../../lib/utils";
+import fs from "fs/promises";
+import config from "../../../../app.config.json";
+
+const { slug } = Astro.params;
+// import file from disc
+const file = await fs.readFile(`${config.mjml.input}/${slug}.mjml`, "utf-8");
+
+// render and export template
+const template = renderMjml(file);
+await exportTemplate({ fileName: slug!, type: "mjml", content: template });
+---
+
+<Email title={slug}>
+  {template && <Fragment set:html={template} />}
+</Email>

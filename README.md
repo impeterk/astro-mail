@@ -85,12 +85,6 @@ You can also use React and [React.mail](https://react.mail) to create templates.
 
 #### MJML
 
-- Generate on save seems to not be working properly on windows.
-- Saving partials only does not trigger rebuild of the template
-  - expected: the `partials/` folder is not _watched_ by the compiler
-  - Just save the template you are importing the partial to
-  - For multiple templates, restarting the server works --> NOT Ideal #sad
-
 #### JS
 
 - Need to figure out, location for files and when to render them
@@ -105,6 +99,10 @@ Inside this project you can find the following structure:
 /
 ├── public/
 │   └── favicon.svg
+├── out/
+│   ├── mjml/
+│   ├── js/
+│   └── react/
 ├── src/
 │   ├── layouts/
 │   │   └── Layout.astro
@@ -113,12 +111,11 @@ Inside this project you can find the following structure:
 │       └── email/
 │           └── [...slug].astro
 │   └── components/
-│   └── emails/
+│   └── templates/
 │       └── js/
-│       └── mjml/
-│           └── templates/
 │           └── partials/
-│       └── html/
+│       └── mjml/
+│           └── partials/
 └── package.json
 ```
 
@@ -126,17 +123,14 @@ Inside this project you can find the following structure:
 
 Based on your approach you should create templates in these folders
 
-- mjml: `src/emails/mjml/templates`
-  > [!IMPORTANT]
-  > with this approach, make sure, that partial files are not located in the `/templates` directory.
-  > More info below
-- js(x): `src/emails/js`
-- React: `src/emails/react`
+- mjml: `src/templates/mjml`
+- js(x): `src/templates/js`
+- React: `src/templates/react`
 
-For js and React approach you can add partials where ever you like. However suggested strucure would be something like `src/email/partials/[js(x)|react]/`.
+For js and React approach you can add partials where ever you like. However suggested strucure would be something like `src/templates/[js(x)|react]/partials`.
 
 Final templates are exported into following structure by default
-`templates/[mjml | js | react]`
+`out/[mjml | js | react]`
 
 > ❗ You can change any of these values in the `app.config.json` file in the root of the project
 

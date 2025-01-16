@@ -2,7 +2,7 @@
 import LucideFiles from "../icons/LucideFiles.astro";
 import { templateLoader } from "../../lib/loaders";
 import { navParams } from "../../lib/utils";
-
+// import Tabs from "../ui/active-tab.astro";
 const search = Astro.url.search;
 const activeTab = Astro.url.searchParams.get("active-tab") || "mjml";
 const templates = templateLoader({ type: activeTab, search: search });
@@ -26,7 +26,13 @@ const activeLink = `${Astro.url.pathname}${search}`;
         class={`btn join-item ${activeTab === "js" ? "btn-primary" : "btn-soft"}`}
         >js</a
       >
+      <a
+        href={navParams(Astro.url.searchParams, "active-tab", "react")}
+        class={`btn join-item ${activeTab === "react" ? "btn-primary" : "btn-soft"}`}
+        >React</a
+      >
     </div>
+    <!-- <Tabs activeTab={activeTab} searchParams={Astro.url.searchParams} /> -->
     <div class="divider my-0"></div>
     {
       templates &&

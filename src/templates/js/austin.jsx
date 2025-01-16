@@ -1,10 +1,10 @@
-export const title = "Austin discount";
+export const title = "Austin something else";
 
 export default function Template() {
   return (
     <mjml>
       <mj-head>
-        <mj-title>Discount Light</mj-title>
+        <mj-title>Discount Austin something else</mj-title>
         <mj-preview>Pre-header Text</mj-preview>
         <mj-attributes>
           <mj-all font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"></mj-all>

@@ -10,6 +10,7 @@ const view = Astro.url.searchParams.get("view");
 const templateTitle = title.replace("emails/html/", "");
 
 const template = Astro.url.pathname.replace(/^\/email\/[^/]+\//, "");
+export const prerender = false;
 ---
 
 <!doctype html>
@@ -50,9 +51,3 @@ const template = Astro.url.pathname.replace(/^\/email\/[^/]+\//, "");
     </style>
   </body>
 </html>
-<!-- <style is:global>
-  :root .astro-loading-indicator {
-    top: 4rem;
-    left: 15rem;
-  }
-</style> -->
