@@ -6,5 +6,12 @@
     <mj-text font-family="helvetica"
       >Changing this does not trigger rerender</mj-text
     >
+    <mj-msobutton
+      font-family="Helvetica"
+      background-color="#f45e43"
+      color="white"
+    >
+      Yo, my maan
+    </mj-msobutton>
   </mj-column>
 </mj-section>

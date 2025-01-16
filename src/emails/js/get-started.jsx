@@ -24,6 +24,14 @@ export default function Template() {
         </mj-section>
         {/* <mj-include path="src/emails/mjml/partials/main.mjml" />  */}
         <Main text="random text from 'jsx'" />
+        <mj-msobutton
+          font-family="Helvetica"
+          background-color="#f45e43"
+          color="white"
+          border-radius="0.25rem"
+        >
+          Yo, my maan
+        </mj-msobutton>
       </mj-body>
     </mjml>
   );
