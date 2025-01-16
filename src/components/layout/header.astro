@@ -1,5 +1,4 @@
 ---
-import LoadingIndicator from "astro-loading-indicator/component";
 import Switch from "./switch.astro";
 
 const { title } = Astro.props;
@@ -14,11 +13,3 @@ const { title } = Astro.props;
     </ul>
   </div>
 </header>
-<LoadingIndicator color="var(--color-primary)" threshold={false} />
-
-<style is:global>
-  :root .astro-loading-indicator {
-    top: 4rem;
-    left: 15rem;
-  }
-</style>
