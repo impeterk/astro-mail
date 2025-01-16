@@ -10,11 +10,12 @@ export function templateLoader({
   if (!type) {
     return null;
   }
-  const matches = import.meta.glob(["/**/*.jsx", "/**/*.mjml"]);
+  const matches = import.meta.glob(["/**/*.jsx", "/**/*.mjml"], {});
   console.log({ matches });
   const templates = Object.keys(matches)
     // @ts-ignore
     .filter((match) => match.startsWith(`/${config[type]?.input}`))
+    .filter((match) => !match.includes("partial"))
     .map((template) => {
       const link = template.replace("/src", "").replace(/\.\w+$/, "") + search;
       const name = template

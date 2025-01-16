@@ -23,7 +23,8 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "resend": "^4.0.1",
-    "tailwindcss": "4.0.0-beta.9"
+    "tailwindcss": "4.0.0-beta.9",
+    "tinyglobby": "^0.2.10"
   },
   "devDependencies": {
     "daisyui": "5.0.0-beta.1",
