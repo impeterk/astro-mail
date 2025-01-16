@@ -1,8 +1,7 @@
 ---
 import LucideFiles from "../icons/LucideFiles.astro";
-import { templateLoader } from "../../lib/loaders";
-import { navParams } from "../../lib/utils";
-// import Tabs from "../ui/active-tab.astro";
+import { templateLoader } from "@/lib/loaders";
+import { navParams } from "@/lib/utils";
 const search = Astro.url.search;
 const activeTab = Astro.url.searchParams.get("active-tab") || "mjml";
 const templates = templateLoader({ type: activeTab, search: search });

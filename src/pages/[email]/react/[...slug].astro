@@ -1,6 +1,6 @@
 ---
 import Email from "@layouts/Email.astro";
-import { renderJsxTemplate, exportTemplate } from "@/lib/utils";
+import { renderReactTemplate, exportTemplate } from "@/lib/utils";
 const { slug } = Astro.params;
 const { pathname } = Astro.url;
 
@@ -9,16 +9,17 @@ const { pathname } = Astro.url;
 const matches = import.meta.glob("/**/*.jsx", {
   eager: true,
 });
-const file = matches[`/src${pathname}.jsx`];
 
+const file = matches[`/src${pathname}.jsx`];
 // creates HTML from mjml in JSX template and exports it as html to new location
 // @ts-ignore
-const template = renderJsxTemplate(file?.default());
+const template = await renderReactTemplate(file?.default());
 await exportTemplate({
-  fileName: slug!.replace("js", ""),
-  type: "js",
+  fileName: slug!.replace("react", ""),
+  type: "react",
   content: template,
 });
+// const template = "hello here";
 ---
 
 {

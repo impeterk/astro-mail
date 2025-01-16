@@ -2,14 +2,14 @@
 
 ## Integrations
 
-- [ ] React mail
+- [x] React mail
 - [ ] Tailwind for mjml?
 
 ## Front end
 
 - [ ] bulk export/send screen?
 - [ ] bulk(all) export button
-- [ ] React section
+- [x] React section
 - [ ] Monaco editor, to edit template directly in the browser for quick fixes ? 🤯
 - [ ] tree structure for templates [maybe use this one](https://www.npmjs.com/package/react-folder-tree)
 

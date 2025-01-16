@@ -3,14 +3,24 @@ import fs from "fs/promises";
 import mjml2html from "mjml";
 import path from "path";
 import { renderToString } from "react-dom/server";
-import config from "../../app.config.json";
+import config from "@@/app.config.json";
+import { render } from "@react-email/render";
+import { defaultMjml } from "./config";
 
-export function renderTemplate(el: JSX.Element) {
-  return mjml2html(renderToString(el)).html;
+export function renderJsxTemplate(el: JSX.Element, options = {}) {
+  const rawHtml = renderToString(el);
+  return mjml2html(rawHtml, { ...defaultMjml, ...options }).html;
 }
 
-export function renderMjml(rawHtml: string) {
-  return mjml2html(rawHtml).html;
+export async function renderReactTemplate(
+  el: JSX.Element,
+  config = { pretty: true }
+) {
+  return await render(el, { ...config });
+}
+
+export function renderMjml(rawHtml: string, options = {}) {
+  return mjml2html(rawHtml, { ...defaultMjml, ...options }).html;
 }
 export function navParams(
   searchParams: URLSearchParams,

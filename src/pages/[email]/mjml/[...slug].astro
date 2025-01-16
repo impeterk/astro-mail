@@ -1,8 +1,8 @@
 ---
-import Email from "../../../layouts/Email.astro";
-import { renderMjml, exportTemplate } from "../../../lib/utils";
+import Email from "@layouts/Email.astro";
+import { renderMjml, exportTemplate } from "@/lib/utils";
 import fs from "fs/promises";
-import config from "../../../../app.config.json";
+import config from "@@/app.config.json";
 
 const { slug } = Astro.params;
 // import file from disc
