@@ -2,6 +2,8 @@
 import LucideFiles from "../icons/LucideFiles.astro";
 import { templateLoader } from "@/lib/loaders";
 import { navParams } from "@/lib/utils";
+import Tabs from "../ui/tabs.tsx";
+import RenderTemplates from "../ui/render-templates.astro";
 const search = Astro.url.search;
 const activeTab = Astro.url.searchParams.get("active-tab") || "mjml";
 const templates = templateLoader({ type: activeTab, search: search });
@@ -14,7 +16,7 @@ const activeLink = `${Astro.url.pathname}${search}`;
     class="menu bg-base-200 text-base-content min-h-full w-60 p-4 gap-1 border-r border-base-300"
   >
     <li class="menu-title">Templates</li>
-    <div class="join">
+    <!-- <div class="join">
       <a
         href={navParams(Astro.url.searchParams, "active-tab", "mjml")}
         class={`btn join-item ${activeTab === "mjml" ? "btn-primary" : "btn-soft"}`}
@@ -30,8 +32,8 @@ const activeLink = `${Astro.url.pathname}${search}`;
         class={`btn join-item ${activeTab === "react" ? "btn-primary" : "btn-soft"}`}
         >React</a
       >
-    </div>
-    <!-- <Tabs activeTab={activeTab} searchParams={Astro.url.searchParams} /> -->
+    </div> -->
+    <Tabs client:load transition:persist />
     <div class="divider my-0"></div>
     {
       templates &&
@@ -52,7 +54,10 @@ const activeLink = `${Astro.url.pathname}${search}`;
         </p>
       )
     }
-    <li class="mt-auto">
+    <div class="divider mt-auto my-0"></div>
+
+    <RenderTemplates />
+    <li>
       <a href="https://documentation.mjml.io/#components" target="_blank"
         ><LucideFiles />mjml documentation</a
       >

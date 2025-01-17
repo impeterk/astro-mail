@@ -1,0 +1,24 @@
+---
+import { actions } from "astro:actions";
+const types = ["mjml", "js", "react", "all"];
+---
+
+<details class="dropdown dropdown-top">
+  <summary class="btn m-1 btn-wide btn-success">Render Templates</summary>
+  <ul
+    class="menu dropdown-content bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm gap-2"
+  >
+    {
+      types.map((t) => (
+        <li>
+          <form method="POST" action={actions.exportTemplates} class="flex">
+            <input hidden name="type" value={t} />
+            <button class="py-1 font-semibold w-full" type="submit">
+              Export {t}
+            </button>
+          </form>
+        </li>
+      ))
+    }
+  </ul>
+</details>

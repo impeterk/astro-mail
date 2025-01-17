@@ -1,4 +1,4 @@
-import { defineAction } from "astro:actions";
+import { ActionError, defineAction } from "astro:actions";
 import { z } from "astro:schema";
 import nodemailer from "nodemailer";
 import path from "path";
@@ -10,6 +10,7 @@ import {
   SMTP_PORT,
   SMTP_SECURE,
 } from "astro:env/server";
+import { exportAllJsx, exportAllMjml, exportAllTemplates } from "@/lib/cli";
 
 export const server = {
   send: defineAction({
@@ -29,6 +30,32 @@ export const server = {
       });
       console.log(data);
       return data;
+    },
+  }),
+  exportTemplates: defineAction({
+    accept: "form",
+    input: z.object({
+      type: z.string(),
+    }),
+    handler: async ({ type }) => {
+      console.log({ type });
+      try {
+        switch (type) {
+          case "mjml":
+            return await exportAllMjml();
+          case "js":
+          case "react":
+            return await exportAllJsx(type);
+          case "all":
+            return await exportAllTemplates();
+        }
+      } catch (e) {
+        console.log(e);
+        throw new ActionError({
+          message: e?.message,
+          code: "INTERNAL_SERVER_ERROR",
+        });
+      }
     },
   }),
 };

@@ -1,5 +1,5 @@
 ---
-import Switch from "./switch.astro";
+import Switch from "../ui/switch.tsx";
 
 const { title } = Astro.props;
 ---
@@ -9,7 +9,7 @@ const { title } = Astro.props;
   <div class="hidden flex-none lg:block">
     <ul class="menu menu-horizontal mx-2">
       <!-- Navbar menu content here -->
-      <Switch />
+      <Switch client:load transition:persist />
     </ul>
   </div>
 </header>

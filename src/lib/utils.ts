@@ -22,6 +22,7 @@ export async function renderReactTemplate(
 export function renderMjml(rawHtml: string, options = {}) {
   return mjml2html(rawHtml, { ...defaultMjml, ...options }).html;
 }
+
 export function navParams(
   searchParams: URLSearchParams,
   key: string,

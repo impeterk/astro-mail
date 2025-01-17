@@ -11,7 +11,6 @@ export function templateLoader({
     return null;
   }
   const matches = import.meta.glob(["/**/*.jsx", "/**/*.mjml"], {});
-  console.log({ matches });
   const templates = Object.keys(matches)
     // @ts-ignore
     .filter((match) => match.startsWith(`/${config[type]?.input}`))
