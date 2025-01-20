@@ -11,6 +11,7 @@ import {
   SMTP_SECURE,
 } from "astro:env/server";
 import { exportAllJsx, exportAllMjml, exportAllTemplates } from "@/lib/cli";
+import config from "@@/app.config.json";
 
 export const server = {
   send: defineAction({
@@ -19,9 +20,14 @@ export const server = {
       email: z.string(),
       template: z.string(),
       title: z.string(),
+      type: z.string(),
     }),
-    handler: async ({ email, template, title }) => {
-      const templatePath = path.join(process.cwd(), "src", template);
+    handler: async ({ email, template, title, type }) => {
+      const templatePath = path.join(
+        process.cwd(),
+        config[type].output,
+        template
+      );
       const templateFile = await fs.readFile(`${templatePath}.html`, "utf-8");
       const data = await mailer({
         to: email,

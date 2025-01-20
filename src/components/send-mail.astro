@@ -4,6 +4,9 @@ import LucideSend from "./icons/LucideSend.astro";
 import LucideMail from "./icons/LucideMail.astro";
 
 const { template, title } = Astro.props;
+
+const type = template.match(/^\/[^\/]+(?:\/[^\/]+)*\/(mjml|react|js)\/.*$/)[1];
+const finalTemplate = template.split(type)[1];
 ---
 
 <div class="absolute top-4 right-4">
@@ -35,8 +38,9 @@ const { template, title } = Astro.props;
               </div>
             </fieldset>
 
-            <input type="text" hidden value={template} name="template" />
+            <input type="text" hidden value={finalTemplate} name="template" />
             <input type="text" hidden value={title} name="title" />
+            <input type="text" hidden value={type} name="type" />
             <button class="btn btn-primary" id="send-btn"
               >Send <LucideSend class="size-4" /></button
             >

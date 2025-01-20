@@ -1,11 +1,11 @@
 import { navParams } from "@/lib/client";
 import { useEffect, useState } from "react";
 
-export default function Tabs() {
+export default function Tabs({ active = "mjml" }: { active: string }) {
   const [searchParams, setSearchParams] = useState<URLSearchParams>(
     new URLSearchParams("")
   );
-  const [activeTab, setActiveTab] = useState("");
+  const [activeTab, setActiveTab] = useState(active);
   useEffect(() => {
     setSearchParams(new URLSearchParams(window?.location?.search));
     setActiveTab(searchParams.get("active-tab") || "mjml");

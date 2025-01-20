@@ -14,7 +14,7 @@ export function templateLoader({
   const templates = Object.keys(matches)
     // @ts-ignore
     .filter((match) => match.startsWith(`/${config[type]?.input}`))
-    .filter((match) => !match.includes("partial"))
+    .filter((match) => !match.includes("/_"))
     .map((template) => {
       const link = template.replace("/src", "").replace(/\.\w+$/, "") + search;
       const name = template

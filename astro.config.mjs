@@ -34,4 +34,5 @@ export default defineConfig({
   }),
 
   integrations: [react()],
+  prefetch: false
 });

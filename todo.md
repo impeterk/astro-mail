@@ -1,5 +1,11 @@
 # TODO
 
+## Major
+
+- [ ] write documentation
+- [ ] create a simple onboarding process
+- [ ] create good \_default folder with explenation comments
+
 ## Integrations
 
 - [x] React mail

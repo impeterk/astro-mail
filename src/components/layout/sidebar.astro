@@ -33,7 +33,7 @@ const activeLink = `${Astro.url.pathname}${search}`;
         >React</a
       >
     </div> -->
-    <Tabs client:load transition:persist />
+    <Tabs client:load transition:persist active={activeTab} />
     <div class="divider my-0"></div>
     {
       templates &&
